@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<!--
+  Portfolio — Raka Pandu Aulia
+  Content verified from VERIFIED-DATA.md (LinkedIn + direct from Raka).
+  Remaining unknowns carry data-todo + an inline "TODO: confirm/replace" comment nearby.
+  Placeholder links use href="#" + data-todo; replace before publishing.
+  Stack: plain HTML5 + Tailwind CDN + minimal vanilla JS. Single self-contained file.
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Raka Pandu Aulia — Game Programmer · Game Artist · Software Engineer</title>
+  <meta name="description" content="Portfolio of Raka Pandu Aulia — Game Programmer, Game Artist, and Software Engineer based in Bandung, Indonesia." />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Optional Google Fonts: Inter (body) + JetBrains Mono (code/dev touches) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'ui-monospace', 'SFMono-Regular', 'monospace'],
+          },
+          colors: {
+            accent: {
+              DEFAULT: '#10b981', // emerald-500
+              soft: '#34d399',
+            },
+          },
+        },
+      },
+    };
+  </script>
+
+  <style>
+    html { scroll-behavior: smooth; }
+    body { scroll-padding-top: 5rem; }
+    /* Fade-in on scroll (toggled via IntersectionObserver) */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .reveal { opacity: 1; transform: none; transition: none; }
+    }
+    /* Subtle grid backdrop for the dark dev aesthetic */
+    .grid-bg {
+      background-image:
+        linear-gradient(to right, rgba(148,163,184,0.06) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(148,163,184,0.06) 1px, transparent 1px);
+      background-size: 48px 48px;
+    }
+  </style>
+</head>
+
+<body class="bg-zinc-950 text-slate-300 font-sans antialiased selection:bg-emerald-500/30 selection:text-emerald-100">
+
+  <!-- Skip link for accessibility -->
+  <a href="#home" class="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:top-3 focus:left-3 focus:rounded focus:bg-emerald-500 focus:px-4 focus:py-2 focus:text-zinc-950 focus:font-semibold">Skip to content</a>
+
+  <!-- ===================== STICKY NAV ===================== -->
+  <header class="sticky top-0 z-40 border-b border-white/5 bg-zinc-950/80 backdrop-blur">
+    <nav class="mx-auto flex max-w-6xl items-center justify-between px-5 py-4" aria-label="Primary navigation">
+      <a href="#home" class="group font-mono text-sm font-bold tracking-tight text-slate-100">
+        <span class="text-emerald-400">&gt;_</span> raka.dev
+      </a>
+
+      <!-- Desktop links -->
+      <ul class="hidden items-center gap-6 text-sm md:flex">
+        <li><a href="#home" class="text-slate-400 transition hover:text-emerald-400">Home</a></li>
+        <li><a href="#about" class="text-slate-400 transition hover:text-emerald-400">About</a></li>
+        <li><a href="#projects" class="text-slate-400 transition hover:text-emerald-400">Projects</a></li>
+        <li><a href="#achievements" class="text-slate-400 transition hover:text-emerald-400">Achievements</a></li>
+        <li><a href="#experience" class="text-slate-400 transition hover:text-emerald-400">Experience</a></li>
+        <li><a href="#skills" class="text-slate-400 transition hover:text-emerald-400">Skills</a></li>
+        <li><a href="#contact" class="rounded-md border border-emerald-500/40 px-3 py-1.5 font-medium text-emerald-300 transition hover:bg-emerald-500/10">Contact</a></li>
+      </ul>
+
+      <!-- Mobile toggle -->
+      <button id="menuBtn" class="inline-flex items-center justify-center rounded-md p-2 text-slate-300 transition hover:bg-white/5 md:hidden" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobileMenu">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+    </nav>
+
+    <!-- Mobile menu -->
+    <ul id="mobileMenu" class="hidden flex-col gap-1 border-t border-white/5 bg-zinc-950 px-5 py-3 text-sm md:hidden">
+      <li><a href="#home" class="block rounded px-2 py-2 text-slate-300 hover:bg-white/5">Home</a></li>
+      <li><a href="#about" class="block rounded px-2 py-2 text-slate-300 hover:bg-white/5">About</a></li>
+      <li><a href="#projects" class="block rounded px-2 py-2 text-slate-300 hover:bg-white/5">Projects</a></li>
+      <li><a href="#achievements" class="block rounded px-2 py-2 text-slate-300 hover:bg-white/5">Achievements</a></li>
+      <li><a href="#experience" class="block rounded px-2 py-2 text-slate-300 hover:bg-white/5">Experience</a></li>
+      <li><a href="#skills" class="block rounded px-2 py-2 text-slate-300 hover:bg-white/5">Skills</a></li>
+      <li><a href="#contact" class="block rounded px-2 py-2 text-emerald-300 hover:bg-white/5">Contact</a></li>
+    </ul>
+  </header>
+
+  <main>
+    <!-- ===================== 1. HOME / HERO ===================== -->
+    <section id="home" class="grid-bg relative overflow-hidden">
+      <div class="pointer-events-none absolute -top-40 left-1/2 h-96 w-96 -translate-x-1/2 rounded-full bg-emerald-500/10 blur-3xl"></div>
+      <div class="mx-auto flex min-h-[88vh] max-w-6xl flex-col-reverse items-center gap-10 px-5 py-24 md:flex-row md:items-center md:justify-between md:gap-14">
+        <div class="flex w-full flex-col justify-center md:flex-1">
+        <p class="reveal mb-4 font-mono text-sm text-emerald-400">// hello, world</p>
+        <h1 class="reveal max-w-4xl text-4xl font-extrabold leading-tight tracking-tight text-slate-50 sm:text-5xl md:text-6xl">
+          Raka Pandu Aulia
+        </h1>
+        <!-- Role line — verified from VERIFIED-DATA.md -->
+        <p class="reveal mt-3 font-mono text-sm text-slate-400 sm:text-base">
+          Game Programmer <span class="text-emerald-500">·</span> Game Artist <span class="text-emerald-500">·</span> Software Engineer
+        </p>
+        <p class="reveal mt-2 flex items-center gap-1.5 font-mono text-xs text-slate-500">
+          <span aria-hidden="true">📍</span> Bandung, Indonesia
+        </p>
+
+        <h2 class="reveal mt-8 max-w-3xl text-2xl font-bold text-slate-100 sm:text-3xl">
+          Building Digital Experiences Through Code &amp; Creativity.
+        </h2>
+
+        <p class="reveal mt-5 max-w-2xl text-base leading-relaxed text-slate-400">
+          I'm a passionate and creative game developer with a strong background in game
+          programming, design, and art. I've shipped game projects across studios and internships,
+          and I keep building and learning software every day — most recently deepening my web
+          development skills.
+        </p>
+
+        <!-- Tag chips -->
+        <div class="reveal mt-7 flex flex-wrap gap-2">
+          <span class="rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3 py-1 font-mono text-xs text-emerald-300">Game Development</span>
+          <span class="rounded-full border border-indigo-500/30 bg-indigo-500/10 px-3 py-1 font-mono text-xs text-indigo-300">Software Engineering</span>
+          <span class="rounded-full border border-sky-500/30 bg-sky-500/10 px-3 py-1 font-mono text-xs text-sky-300">Web Development</span>
+        </div>
+
+        <!-- CTA buttons -->
+        <div class="reveal mt-9 flex flex-wrap gap-3">
+          <a href="#projects" class="rounded-lg bg-emerald-500 px-5 py-3 text-sm font-semibold text-zinc-950 transition hover:bg-emerald-400">View Projects</a>
+          <a href="#contact" class="rounded-lg border border-white/15 px-5 py-3 text-sm font-semibold text-slate-200 transition hover:border-emerald-500/50 hover:text-emerald-300">Contact</a>
+        </div>
+        </div>
+
+        <!-- Profile avatar -->
+        <div class="reveal flex shrink-0 justify-center md:justify-end">
+          <div class="relative">
+            <div class="pointer-events-none absolute -inset-3 rounded-full bg-emerald-500/10 blur-2xl" aria-hidden="true"></div>
+            <img src="assets/profile.jpg" alt="Raka Pandu Aulia" width="320" height="400" loading="eager"
+                 class="relative h-56 w-56 rounded-2xl object-cover object-top ring-2 ring-emerald-500/40 ring-offset-2 ring-offset-zinc-950 shadow-2xl shadow-emerald-500/10 sm:h-64 sm:w-64 md:h-72 md:w-72" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== 2. ABOUT ===================== -->
+    <section id="about" class="border-t border-white/5 bg-zinc-950">
+      <div class="mx-auto max-w-6xl px-5 py-20 md:py-28">
+        <div class="reveal mb-10">
+          <p class="font-mono text-sm text-emerald-400">// about</p>
+          <h2 class="mt-2 text-3xl font-bold text-slate-50">Who I am</h2>
+        </div>
+
+        <div class="grid gap-10 md:grid-cols-5">
+          <div class="reveal md:col-span-3 space-y-5 text-base leading-relaxed text-slate-400">
+            <p>
+              I'm a passionate and creative game developer <span class="text-slate-500">(He/Him)</span>
+              with a strong background in game programming, design, and art. I'm a Software Engineering
+              graduate from Telkom University (2021–2024), with hands-on experience built through
+              internships and bootcamps.
+            </p>
+            <p>
+              <span class="text-slate-200">Right now</span> I work full-time as a Bank Teller at BCA —
+              a role outside the IT field — while continuing to learn and build software in parallel.
+              Staying consistent as a self-driven learner matters more to me than the title on the badge.
+            </p>
+            <p>
+              I'm also pursuing an ongoing S1 Computer Science extension at BINUS to keep sharpening
+              my engineering foundations.
+            </p>
+
+            <!-- Languages — no fluency claims (per VERIFIED-DATA) -->
+            <div>
+              <p class="mb-2 text-sm font-semibold text-slate-200">Languages</p>
+              <div class="flex flex-wrap gap-2">
+                <span class="rounded-md border border-white/10 bg-white/5 px-3 py-1 font-mono text-xs text-slate-300">Indonesia</span>
+                <span class="rounded-md border border-white/10 bg-white/5 px-3 py-1 font-mono text-xs text-slate-300">Inggris</span>
+                <span class="rounded-md border border-white/10 bg-white/5 px-3 py-1 font-mono text-xs text-slate-300">Jepang</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Education card -->
+          <div class="reveal md:col-span-2">
+            <div class="rounded-xl border border-white/10 bg-zinc-900/60 p-6">
+              <p class="mb-4 font-mono text-xs uppercase tracking-wider text-emerald-400">Education</p>
+
+              <!-- D3 Telkom — completed ✅ -->
+              <div class="mb-5">
+                <p class="text-sm font-semibold text-slate-100">D3 Software Engineering (RPLA)</p>
+                <p class="text-sm text-slate-400">Telkom University</p>
+                <p class="mt-1 font-mono text-xs text-slate-500">2021 – 2024 · Completed</p>
+              </div>
+
+              <!-- S1 extension BINUS — ongoing ✅ -->
+              <div>
+                <p class="text-sm font-semibold text-slate-100">S1 Computer Science (Extension)</p>
+                <p class="text-sm text-slate-400">BINUS University</p>
+                <p class="mt-1 font-mono text-xs text-emerald-400/90">Ongoing</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== 3. PROJECTS ===================== -->
+    <section id="projects" class="border-t border-white/5 bg-zinc-950 grid-bg">
+      <div class="mx-auto max-w-6xl px-5 py-20 md:py-28">
+        <div class="reveal mb-10">
+          <p class="font-mono text-sm text-emerald-400">// projects</p>
+          <h2 class="mt-2 text-3xl font-bold text-slate-50">Featured work</h2>
+          <p class="mt-2 max-w-2xl text-sm text-slate-400">A focused selection — featured titles and current in-progress builds.</p>
+        </div>
+
+        <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+
+          <!-- Project 1: Voluspá (verified) -->
+          <article class="reveal group flex flex-col rounded-xl border border-white/10 bg-zinc-900/60 p-6 transition hover:border-emerald-500/40">
+            <div class="mb-4 overflow-hidden rounded-lg border border-white/10">
+              <img src="assets/voluspa.jpeg" alt="Key art for Voluspá — Norse post-Ragnarök adventure" loading="lazy" width="640" height="360" class="aspect-video w-full object-cover" />
+            </div>
+            <div class="mb-2 flex items-center gap-2">
+              <h3 class="text-lg font-semibold text-slate-100">Voluspá</h3>
+              <span class="rounded-full border border-emerald-400/30 bg-emerald-400/10 px-2 py-0.5 font-mono text-[10px] text-emerald-300">Game · Cliffbite</span>
+            </div>
+            <p class="text-xs font-mono text-slate-500">Contributors: Winner, Maya +1</p>
+            <p class="mt-3 flex-1 text-sm leading-relaxed text-slate-400">
+              A Norse post-Ragnarök adventure where you play as Urd, rebuilding civilization on
+              Yggdrasil. Collect core seeds each mission to restore balance and cross the Bifröst Bridge.
+            </p>
+            <div class="mt-4 flex flex-wrap gap-1.5">
+              <span class="rounded border border-white/10 bg-white/5 px-2 py-0.5 font-mono text-[11px] text-slate-300">Unity</span>
+              <span class="rounded border border-white/10 bg-white/5 px-2 py-0.5 font-mono text-[11px] text-slate-300">C#</span>
+              <span class="rounded border border-white/10 bg-white/5 px-2 py-0.5 font-mono text-[11px] text-slate-300">Action-Adventure</span>
+            </div>
+            <!-- Project link pending real URL -->
+            <a href="#" data-todo="project-link" class="mt-5 inline-flex items-center gap-1 font-mono text-xs text-emerald-400 transition hover:text-emerald-300">View project →</a>
+          </article>
+
+          <!-- Project 2: KICKOFF LAND! (verified) -->
+          <article class="reveal group flex flex-col rounded-xl border border-white/10 bg-zinc-900/60 p-6 transition hover:border-emerald-500/40">
+            <div class="mb-4 overflow-hidden rounded-lg border border-white/10">
+              <img src="assets/kickoff-land.jpeg" alt="Key art for KICKOFF LAND! — 2.5D clicker tower defense inspired by Bali" loading="lazy" width="640" height="360" class="aspect-video w-full object-cover" />
+            </div>
+            <div class="mb-2 flex items-center gap-2">
+              <h3 class="text-lg font-semibold text-slate-100">KICKOFF LAND!</h3>
+              <span class="rounded-full border border-emerald-400/30 bg-emerald-400/10 px-2 py-0.5 font-mono text-[10px] text-emerald-300">Game · Cliffbite</span>
+            </div>
+            <p class="text-xs font-mono text-slate-500">Contributors: Winner, Maya +1</p>
+            <p class="mt-3 flex-1 text-sm leading-relaxed text-slate-400">
+              A 2.5D clicker blending tower defense, tycoon, and card games — manage resources, build,
+              and defend your land from invaders. The world is heavily inspired by Bali.
+            </p>
+            <div class="mt-4 flex flex-wrap gap-1.5">
+              <span class="rounded border border-white/10 bg-white/5 px-2 py-0.5 font-mono text-[11px] text-slate-300">Unity</span>
+              <span class="rounded border border-white/10 bg-white/5 px-2 py-0.5 font-mono text-[11px] text-slate-300">C#</span>
+              <span class="rounded border border-white/10 bg-white/5 px-2 py-0.5 font-mono text-[11px] text-slate-300">2.5D</span>
+            </div>
+            <!-- Project link pending real URL -->
+            <a href="#" data-todo="project-link" class="mt-5 inline-flex items-center gap-1 font-mono text-xs text-emerald-400 transition hover:text-emerald-300">View project →</a>
+          </article>
+
+          <!-- Project 3: Gourmet Guardians (verified — independent side project, NOT Cliffbite) -->
+          <article class="reveal group flex flex-col rounded-xl border border-white/10 bg-zinc-900/60 p-6 transition hover:border-emerald-500/40">
+            <div class="mb-4 overflow-hidden rounded-lg border border-white/10">
+              <img src="assets/gourmet-guardians.jpeg" alt="Key art for Gourmet Guardians — post-apocalyptic cooking tower defense" loading="lazy" width="640" height="360" class="aspect-video w-full object-cover" />
+            </div>
+            <div class="mb-2 flex flex-wrap items-center gap-2">
+              <h3 class="text-lg font-semibold text-slate-100">Gourmet Guardians</h3>
+              <span class="rounded-full border border-sky-400/30 bg-sky-400/10 px-2 py-0.5 font-mono text-[10px] text-sky-300">Game · Side Project (competition)</span>
+            </div>
+            <p class="text-xs font-mono text-slate-500">Cook, Create, Defend · Independent — not a Cliffbite title · Contributor: Dimas</p>
+            <p class="mt-3 flex-1 text-sm leading-relaxed text-slate-400">
+              An independent side project entered in a competition. In a post-apocalyptic world, a chef
+              turns dishes into living food-tower creatures to fend off waves of mutants.
+            </p>
+            <div class="mt-4 flex flex-wrap gap-1.5">
+              <span class="rounded border border-white/10 bg-white/5 px-2 py-0.5 font-mono text-[11px] text-slate-300">Unity</span>
+              <span class="rounded border border-white/10 bg-white/5 px-2 py-0.5 font-mono text-[11px] text-slate-300">C#</span>
+              <span class="rounded border border-white/10 bg-white/5 px-2 py-0.5 font-mono text-[11px] text-slate-300">Tower Defense</span>
+            </div>
+            <!-- Project link pending real URL -->
+            <a href="#" data-todo="project-link" class="mt-5 inline-flex items-center gap-1 font-mono text-xs text-emerald-400 transition hover:text-emerald-300">View project →</a>
+          </article>
+
+          <!-- Project 4: Otherworldly Hearts (verified — Infinite Learning, award) -->
+          <article class="reveal group flex flex-col rounded-xl border border-white/10 bg-zinc-900/60 p-6 transition hover:border-emerald-500/40">
+            <div class="mb-4 overflow-hidden rounded-lg border border-white/10">
+              <img src="assets/otherworldly-hearts.jpeg" alt="Key art for Otherworldly Hearts — 2D platformer about a shaman and a ghost" loading="lazy" width="640" height="360" class="aspect-video w-full object-cover" />
+            </div>
+            <div class="mb-2 flex flex-wrap items-center gap-2">
+              <h3 class="text-lg font-semibold text-slate-100">Otherworldly Hearts</h3>
+              <span class="rounded-full border border-amber-400/30 bg-amber-400/10 px-2 py-0.5 font-mono text-[10px] text-amber-300">Game · Infinite Learning · 🏆 Best Local Game</span>
+            </div>
+            <p class="text-xs font-mono text-slate-500">Infinite Learning Indonesia · Game Dev Batch 5</p>
+            <p class="mt-3 flex-1 text-sm leading-relaxed text-slate-400">
+              A 2D platformer about forbidden love between a shaman and a ghost. Free her and guide her
+              toward the afterlife. Won Best Local Game at Infinite Learning Game Dev Batch 5.
+            </p>
+            <div class="mt-4 flex flex-wrap gap-1.5">
+              <span class="rounded border border-white/10 bg-white/5 px-2 py-0.5 font-mono text-[11px] text-slate-300">Unity</span>
+              <span class="rounded border border-white/10 bg-white/5 px-2 py-0.5 font-mono text-[11px] text-slate-300">C#</span>
+              <span class="rounded border border-white/10 bg-white/5 px-2 py-0.5 font-mono text-[11px] text-slate-300">2D Platformer</span>
+            </div>
+            <!-- Project link pending real URL -->
+            <a href="#" data-todo="project-link" class="mt-5 inline-flex items-center gap-1 font-mono text-xs text-emerald-400 transition hover:text-emerald-300">View project →</a>
+          </article>
+
+          <!-- Project 5: SAMIRA (final project — details to confirm) -->
+          <!-- TODO: confirm/replace — finer gameplay/role details -->
+          <article class="reveal group flex flex-col rounded-xl border border-white/10 bg-zinc-900/60 p-6 transition hover:border-emerald-500/40">
+            <div class="mb-4 flex aspect-video items-center justify-center rounded-lg border border-dashed border-white/10 bg-white/5">
+              <span class="font-mono text-xs text-slate-500">Media coming soon</span>
+            </div>
+            <div class="mb-2 flex flex-wrap items-center gap-2">
+              <h3 class="text-lg font-semibold text-slate-100">SAMIRA</h3>
+              <span class="rounded-full border border-indigo-400/30 bg-indigo-400/10 px-2 py-0.5 font-mono text-[10px] text-indigo-300">Mixed Reality · Final Project</span>
+            </div>
+            <p class="text-xs font-mono text-slate-500">Simulator APAR Mixed Reality</p>
+            <p class="mt-3 flex-1 text-sm leading-relaxed text-slate-400">
+              A fire-extinguisher (APAR) training simulator built with Mixed Reality.
+              <span class="text-amber-300/80" data-todo="samira-details">Finer details to be confirmed.</span>
+            </p>
+            <div class="mt-4 flex flex-wrap gap-1.5">
+              <span class="rounded border border-white/10 bg-white/5 px-2 py-0.5 font-mono text-[11px] text-slate-300">Unity</span>
+              <span class="rounded border border-white/10 bg-white/5 px-2 py-0.5 font-mono text-[11px] text-slate-300">MR</span>
+              <span class="rounded border border-white/10 bg-white/5 px-2 py-0.5 font-mono text-[11px] text-slate-300">MRTK</span>
+            </div>
+            <!-- Project link pending real URL -->
+            <a href="#" data-todo="project-link" class="mt-5 inline-flex items-center gap-1 font-mono text-xs text-emerald-400 transition hover:text-emerald-300">View project →</a>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== 4. ACHIEVEMENTS ===================== -->
+    <section id="achievements" class="border-t border-white/5 bg-zinc-950">
+      <div class="mx-auto max-w-6xl px-5 py-20 md:py-28">
+        <div class="reveal mb-10">
+          <p class="font-mono text-sm text-emerald-400">// achievements</p>
+          <h2 class="mt-2 text-3xl font-bold text-slate-50">Recognition</h2>
+        </div>
+
+        <div class="grid gap-6 sm:grid-cols-2">
+          <!-- Best Local Game ⚠️ -->
+          <!-- TODO: confirm/replace -->
+          <div class="reveal flex gap-4 rounded-xl border border-white/10 bg-zinc-900/60 p-6">
+            <span class="text-2xl" aria-hidden="true">🏆</span>
+            <div>
+              <h3 class="font-semibold text-slate-100">Best Local Game</h3>
+              <p class="mt-1 text-sm text-slate-400">Infinite Learning Game Dev Batch 5</p>
+              <p class="mt-0.5 font-mono text-xs text-slate-500">Project: Otherworldly Hearts</p>
+            </div>
+          </div>
+
+          <!-- People's Choice — project name & year TBC -->
+          <!-- TODO: confirm/replace -->
+          <div class="reveal flex gap-4 rounded-xl border border-white/10 bg-zinc-900/60 p-6">
+            <span class="text-2xl" aria-hidden="true">🏆</span>
+            <div>
+              <h3 class="font-semibold text-slate-100">People's Choice Award</h3>
+              <p class="mt-1 text-sm text-slate-400">TSA Game Fest</p>
+              <p class="mt-0.5 font-mono text-xs text-amber-300/80" data-todo="peoples-choice-details">Project name &amp; year: to be confirmed</p>
+            </div>
+          </div>
+
+          <!-- VSGA Junior Game Programmer — certification (verified) -->
+          <div class="reveal flex gap-4 rounded-xl border border-white/10 bg-zinc-900/60 p-6">
+            <span class="text-2xl" aria-hidden="true">📜</span>
+            <div>
+              <h3 class="font-semibold text-slate-100">VSGA Junior Game Programmer</h3>
+              <p class="mt-1 text-sm text-slate-400">Digital Talent Scholarship</p>
+              <p class="mt-0.5 font-mono text-xs text-slate-500">Issued May 2022 · C#, Unity</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== 5. EXPERIENCE ===================== -->
+    <section id="experience" class="border-t border-white/5 bg-zinc-950 grid-bg">
+      <div class="mx-auto max-w-6xl px-5 py-20 md:py-28">
+        <div class="reveal mb-10">
+          <p class="font-mono text-sm text-emerald-400">// experience</p>
+          <h2 class="mt-2 text-3xl font-bold text-slate-50">Where I've worked</h2>
+        </div>
+
+        <div class="grid gap-10 md:grid-cols-2">
+          <!-- Work experience -->
+          <div>
+            <h3 class="reveal mb-5 font-mono text-xs uppercase tracking-wider text-slate-400">Professional</h3>
+            <ol class="relative space-y-6 border-l border-white/10 pl-6">
+              <!-- Bank Teller — BCA (current, outside IT) -->
+              <li class="reveal relative">
+                <span class="absolute -left-[29px] top-1 h-3 w-3 rounded-full border border-emerald-400 bg-zinc-950"></span>
+                <p class="text-sm font-semibold text-slate-100">Bank Teller</p>
+                <p class="text-sm text-slate-400">PT Bank Central Asia Tbk (BCA) <span class="text-slate-500">· Internship</span></p>
+                <p class="mt-0.5 font-mono text-xs text-emerald-400/90">Jan 2025 – present · Tangerang · On-site</p>
+                <p class="mt-1 text-xs text-slate-500">Current full-time role outside IT — building and learning software in parallel.</p>
+              </li>
+
+              <!-- Game Programmer — Cliffbite -->
+              <li class="reveal relative">
+                <span class="absolute -left-[29px] top-1 h-3 w-3 rounded-full border border-emerald-400 bg-zinc-950"></span>
+                <p class="text-sm font-semibold text-slate-100">Game Programmer</p>
+                <p class="text-sm text-slate-400">Cliffbite Game <span class="text-slate-500">· Freelance</span></p>
+                <p class="mt-0.5 font-mono text-xs text-emerald-400/90">Aug 2024 – present · Bandung · Remote</p>
+              </li>
+
+              <!-- Game Programmer Intern — Infinite Learning -->
+              <li class="reveal relative">
+                <span class="absolute -left-[29px] top-1 h-3 w-3 rounded-full border border-white/20 bg-zinc-950"></span>
+                <p class="text-sm font-semibold text-slate-100">Game Programmer</p>
+                <p class="text-sm text-slate-400">Infinite Learning Indonesia <span class="text-slate-500">· Internship</span></p>
+                <p class="mt-0.5 font-mono text-xs text-slate-500">Feb 2024 – Jun 2024 · Batam</p>
+                <p class="mt-1 text-xs text-slate-500">C#, 2D Animation</p>
+              </li>
+
+              <!-- Game Artist Intern — Infinite Learning -->
+              <li class="reveal relative">
+                <span class="absolute -left-[29px] top-1 h-3 w-3 rounded-full border border-white/20 bg-zinc-950"></span>
+                <p class="text-sm font-semibold text-slate-100">Game Artist</p>
+                <p class="text-sm text-slate-400">Infinite Learning Indonesia <span class="text-slate-500">· Internship</span></p>
+                <p class="mt-0.5 font-mono text-xs text-slate-500">Aug 2023 – Dec 2023 · Batam</p>
+                <p class="mt-1 text-xs text-slate-500">Game Design, Character Animation</p>
+              </li>
+            </ol>
+          </div>
+
+          <!-- Organization / leadership -->
+          <div>
+            <h3 class="reveal mb-5 font-mono text-xs uppercase tracking-wider text-slate-400">Organization — HIMADIRA, Telkom University</h3>
+            <ol class="relative space-y-6 border-l border-white/10 pl-6">
+              <!-- Head of Community Service -->
+              <li class="reveal relative">
+                <span class="absolute -left-[29px] top-1 h-3 w-3 rounded-full border border-indigo-400 bg-zinc-950"></span>
+                <p class="text-sm font-semibold text-slate-100">Head of Community Service</p>
+                <p class="text-sm text-slate-400">HIMADIRA · Telkom University</p>
+                <p class="mt-0.5 font-mono text-xs text-slate-500">Jun 2023 – Dec 2023</p>
+                <p class="mt-1 text-xs text-slate-500">Led community service &amp; outreach programs, coordinated initiatives, and managed resources.</p>
+              </li>
+
+              <!-- Students Meeting Board -->
+              <li class="reveal relative">
+                <span class="absolute -left-[29px] top-1 h-3 w-3 rounded-full border border-white/20 bg-zinc-950"></span>
+                <p class="text-sm font-semibold text-slate-100">Students Meeting Board</p>
+                <p class="text-sm text-slate-400">HIMADIRA · Telkom University</p>
+                <p class="mt-0.5 font-mono text-xs text-slate-500">Mar 2022 – Jun 2023</p>
+                <p class="mt-1 text-xs text-slate-500">Oversaw HIMADIRA performance, ran evaluations, and delivered performance reports.</p>
+              </li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== 6. SKILLS ===================== -->
+    <section id="skills" class="border-t border-white/5 bg-zinc-950">
+      <div class="mx-auto max-w-6xl px-5 py-20 md:py-28">
+        <div class="reveal mb-10">
+          <p class="font-mono text-sm text-emerald-400">// skills</p>
+          <h2 class="mt-2 text-3xl font-bold text-slate-50">What I work with</h2>
+        </div>
+
+        <!-- Skills grouped as pills — no asserted levels (verified from VERIFIED-DATA) -->
+        <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+
+          <div class="reveal rounded-xl border border-white/10 bg-zinc-900/60 p-6">
+            <p class="mb-3 font-mono text-xs uppercase tracking-wider text-emerald-400">Leadership</p>
+            <div class="flex flex-wrap gap-2">
+              <span class="rounded-md border border-white/10 bg-white/5 px-3 py-1 font-mono text-xs text-slate-300">Leadership</span>
+              <span class="rounded-md border border-white/10 bg-white/5 px-3 py-1 font-mono text-xs text-slate-300">Team Leadership</span>
+            </div>
+          </div>
+
+          <div class="reveal rounded-xl border border-white/10 bg-zinc-900/60 p-6">
+            <p class="mb-3 font-mono text-xs uppercase tracking-wider text-emerald-400">Languages &amp; Code</p>
+            <div class="flex flex-wrap gap-2">
+              <span class="rounded-md border border-white/10 bg-white/5 px-3 py-1 font-mono text-xs text-slate-300">C#</span>
+              <span class="rounded-md border border-white/10 bg-white/5 px-3 py-1 font-mono text-xs text-slate-300">Java</span>
+            </div>
+          </div>
+
+          <div class="reveal rounded-xl border border-white/10 bg-zinc-900/60 p-6">
+            <p class="mb-3 font-mono text-xs uppercase tracking-wider text-emerald-400">Game Dev</p>
+            <div class="flex flex-wrap gap-2">
+              <span class="rounded-md border border-white/10 bg-white/5 px-3 py-1 font-mono text-xs text-slate-300">Unity</span>
+              <span class="rounded-md border border-white/10 bg-white/5 px-3 py-1 font-mono text-xs text-slate-300">Game Design</span>
+              <span class="rounded-md border border-white/10 bg-white/5 px-3 py-1 font-mono text-xs text-slate-300">Tilemap</span>
+              <span class="rounded-md border border-white/10 bg-white/5 px-3 py-1 font-mono text-xs text-slate-300">Photon Fusion</span>
+              <span class="rounded-md border border-white/10 bg-white/5 px-3 py-1 font-mono text-xs text-slate-300">TextMeshPro</span>
+              <span class="rounded-md border border-white/10 bg-white/5 px-3 py-1 font-mono text-xs text-slate-300">DOTween</span>
+            </div>
+          </div>
+
+          <div class="reveal rounded-xl border border-white/10 bg-zinc-900/60 p-6">
+            <p class="mb-3 font-mono text-xs uppercase tracking-wider text-emerald-400">VR / MR</p>
+            <div class="flex flex-wrap gap-2">
+              <span class="rounded-md border border-white/10 bg-white/5 px-3 py-1 font-mono text-xs text-slate-300">MRTK 3</span>
+              <span class="rounded-md border border-white/10 bg-white/5 px-3 py-1 font-mono text-xs text-slate-300">Meta Quest 2/3</span>
+            </div>
+          </div>
+
+          <div class="reveal rounded-xl border border-white/10 bg-zinc-900/60 p-6">
+            <p class="mb-3 font-mono text-xs uppercase tracking-wider text-emerald-400">Art &amp; Animation</p>
+            <div class="flex flex-wrap gap-2">
+              <span class="rounded-md border border-white/10 bg-white/5 px-3 py-1 font-mono text-xs text-slate-300">2D Animation</span>
+              <span class="rounded-md border border-white/10 bg-white/5 px-3 py-1 font-mono text-xs text-slate-300">Character Animation</span>
+              <span class="rounded-md border border-white/10 bg-white/5 px-3 py-1 font-mono text-xs text-slate-300">Aseprite</span>
+              <span class="rounded-md border border-white/10 bg-white/5 px-3 py-1 font-mono text-xs text-slate-300">Adobe Photoshop</span>
+              <span class="rounded-md border border-white/10 bg-white/5 px-3 py-1 font-mono text-xs text-slate-300">Clip Studio Paint</span>
+              <span class="rounded-md border border-white/10 bg-white/5 px-3 py-1 font-mono text-xs text-slate-300">Figma</span>
+              <span class="rounded-md border border-white/10 bg-white/5 px-3 py-1 font-mono text-xs text-slate-300">Canva</span>
+            </div>
+          </div>
+
+          <!-- Currently learning — no mastery claims -->
+          <div class="reveal rounded-xl border border-dashed border-sky-400/20 bg-zinc-900/40 p-6">
+            <p class="mb-3 font-mono text-xs uppercase tracking-wider text-sky-300">Currently learning</p>
+            <div class="flex flex-wrap gap-2">
+              <span class="rounded-md border border-sky-400/20 bg-sky-400/5 px-3 py-1 font-mono text-xs text-sky-200">Next.js</span>
+              <span class="rounded-md border border-sky-400/20 bg-sky-400/5 px-3 py-1 font-mono text-xs text-sky-200">TypeScript</span>
+              <span class="rounded-md border border-sky-400/20 bg-sky-400/5 px-3 py-1 font-mono text-xs text-sky-200">Tailwind CSS</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== 7. CONTACT ===================== -->
+    <section id="contact" class="border-t border-white/5 bg-zinc-950 grid-bg">
+      <div class="mx-auto max-w-3xl px-5 py-20 text-center md:py-28">
+        <div class="reveal">
+          <p class="font-mono text-sm text-emerald-400">// contact</p>
+          <h2 class="mt-2 text-3xl font-bold text-slate-50">Let's build something</h2>
+          <p class="mx-auto mt-4 max-w-xl text-base leading-relaxed text-slate-400">
+            Open to collaboration on games, interactive experiences, and web projects.
+            If you have an idea or a role in mind, I'd love to hear about it.
+          </p>
+          <p class="mt-3 font-mono text-xs text-slate-500">📍 Bandung, Indonesia</p>
+
+          <!--
+            Linktree is a real link. GitHub / LinkedIn / Email remain href="#" + data-todo
+            placeholders until real URLs are provided.
+          -->
+          <div class="mt-8 flex flex-wrap justify-center gap-3">
+            <a href="https://linktr.ee/auruuu" target="_blank" rel="noopener noreferrer" aria-label="Linktree — all links"
+               class="inline-flex items-center gap-2 rounded-lg border border-emerald-500/40 bg-emerald-500/10 px-5 py-3 text-sm font-semibold text-emerald-300 transition hover:bg-emerald-500/20">
+              Linktree
+            </a>
+            <!-- TODO: confirm/replace -->
+            <a href="#" data-todo="github-url" aria-label="GitHub profile (placeholder — replace me)"
+               class="inline-flex items-center gap-2 rounded-lg border border-white/15 px-5 py-3 text-sm font-semibold text-slate-200 transition hover:border-emerald-500/50 hover:text-emerald-300">
+              GitHub
+            </a>
+            <!-- TODO: confirm/replace -->
+            <a href="#" data-todo="linkedin-url" aria-label="LinkedIn profile (placeholder — replace me)"
+               class="inline-flex items-center gap-2 rounded-lg border border-white/15 px-5 py-3 text-sm font-semibold text-slate-200 transition hover:border-emerald-500/50 hover:text-emerald-300">
+              LinkedIn
+            </a>
+            <!-- TODO: confirm/replace -->
+            <a href="#" data-todo="email-address" aria-label="Email (placeholder — replace me)"
+               class="inline-flex items-center gap-2 rounded-lg border border-white/15 px-5 py-3 text-sm font-semibold text-slate-200 transition hover:border-emerald-500/50 hover:text-emerald-300">
+              Email
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="border-t border-white/5 bg-zinc-950">
+    <div class="mx-auto flex max-w-6xl flex-col items-center justify-between gap-2 px-5 py-8 text-center sm:flex-row sm:text-left">
+      <p class="font-mono text-xs text-slate-500">© <span id="year"></span> Raka Pandu Aulia</p>
+      <p class="font-mono text-xs text-slate-600">Built with HTML + Tailwind</p>
+    </div>
+  </footer>
+
+  <!-- ===================== MINIMAL VANILLA JS ===================== -->
+  <script>
+    // Mobile menu toggle
+    (function () {
+      var btn = document.getElementById('menuBtn');
+      var menu = document.getElementById('mobileMenu');
+      if (btn && menu) {
+        btn.addEventListener('click', function () {
+          var open = menu.classList.toggle('hidden') === false;
+          btn.setAttribute('aria-expanded', String(open));
+        });
+        // Close menu after clicking a link
+        menu.querySelectorAll('a').forEach(function (a) {
+          a.addEventListener('click', function () {
+            menu.classList.add('hidden');
+            btn.setAttribute('aria-expanded', 'false');
+          });
+        });
+      }
+    })();
+
+    // Fade-in on scroll via IntersectionObserver
+    (function () {
+      var items = document.querySelectorAll('.reveal');
+      if (!('IntersectionObserver' in window)) {
+        items.forEach(function (el) { el.classList.add('is-visible'); });
+        return;
+      }
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            io.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12 });
+      items.forEach(function (el) { io.observe(el); });
+    })();
+
+    // Current year in footer
+    var yearEl = document.getElementById('year');
+    if (yearEl) { yearEl.textContent = new Date().getFullYear(); }
+  </script>
+</body>
+</html>
