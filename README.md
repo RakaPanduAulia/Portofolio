@@ -7,7 +7,7 @@ experience, achievements, and skills.
 
 ## Live site
 
-Once GitHub Pages is enabled: **https://rakapanduaulia.github.io/portfolio/**
+Once GitHub Pages is enabled: **https://rakapanduaulia.github.io/Portofolio/**
 
 ## Sections
 
